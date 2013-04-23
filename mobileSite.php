@@ -2,13 +2,12 @@
 /*
 Plugin Name: Mobile Site
 Version: 1.0
-Description: A plugin which formats your site with a mobile theme for visitors on Apple <a href="http://www.apple.com/iphone/">iPhone</a> / <a href="http://www.apple.com/ipodtouch/">iPod touch</a>, <a href="http://www.android.com/">Google Android</a>, <a href="http://www.blackberry.com/">Blackberry Storm and Torch</a>, <a href="http://www.palm.com/us/products/phones/pre/">Palm Pre</a> and other touch-based smartphones.
+Description: A plugin uses the 'HTTP_USER_AGENT' to choose the theme for your site.
 Author: Xhamps
 Author URI: http://www.xhamps.com.br
 Text Domain: mobileSite
 
 License: GNU General Public License 2.0 (GPL) http://www.gnu.org/licenses/gpl.html
-
 
 */
 

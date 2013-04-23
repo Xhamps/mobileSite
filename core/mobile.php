@@ -9,7 +9,6 @@ class Mobile
   var $isMobile;
   var $desired_view;
   var $useragents;
-  var $exclude_agents;
   function __construct()
   {
     # code...
@@ -51,12 +50,6 @@ class Mobile
                           'AdsBot-Google'   // Google's Ad Bot Crawler
                           );
 
-    $this->exclude_agents = array(
-                              'SCH-I800',       // Samsung Galaxy Tab
-                              'Xoom',           // Motorola Xoom tablet
-                              'P160U' ,         // HP TouchPad
-                              'Nexus 7'         // Nexus 7
-                              );
 
   }
   function detectMobile() {
@@ -67,15 +60,6 @@ class Mobile
       if ( preg_match( "#$useragent#i", $container ) ) {
         $this->isMobile = true;
         break;
-      }
-    }
-
-    if ( $this->mobile ) {
-      foreach( $this->exclude_agents as $agent ) {
-        if ( preg_match( "#$agent#i", $container ) ) {
-          $this->isMobile = false;
-          break;
-        }
       }
     }
 
