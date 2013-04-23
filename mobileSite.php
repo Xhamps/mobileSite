@@ -14,10 +14,13 @@ License: GNU General Public License 2.0 (GPL) http://www.gnu.org/licenses/gpl.ht
  require_once("core/functions.php");
  require_once("core/helpers.php");
  require_once("core/mobile.php");
-
+ if ( is_admin() ) {
+   require_once("core/admin/Admin.php");
+ }
 class MobileSite
 {
   var $mobile;
+  var $admin;
   function MobileSite()
   {
     # code...
@@ -27,6 +30,9 @@ class MobileSite
 
     $this->addFilters();
 
+    if(is_admin()){
+      $this->admin = new AdminMb();
+    }
 
   }
 
@@ -38,6 +44,7 @@ class MobileSite
       add_filter( 'theme_root_uri', array(&$this, 'theme_root_uri') );
       add_filter( 'template', array(&$this, 'get_template') );
     }
+
     add_filter( 'init', array(&$this->mobile, 'wpmobile_check_switch_redirect') );
   }
 

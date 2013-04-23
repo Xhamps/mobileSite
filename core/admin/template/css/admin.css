@@ -1,0 +1,18 @@
+#wpbody-content h1{
+  color: #333C42;
+  font-size: 22px;
+}
+.postbox .content{
+  padding: 15px;
+}
+
+.alertUpdate{
+  border-radius: 4px;
+  text-shadow: #fff 0 1px 1px;
+  margin: 0 auto;
+  padding: 2px 10px;
+  height: 26px;
+  line-height: 26px;
+  border: 1px solid #ffe8a1;
+  background: #ffe8a1;
+}
