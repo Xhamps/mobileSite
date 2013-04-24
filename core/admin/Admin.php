@@ -1,6 +1,5 @@
 <?php
 
-require_once("Settings.php");
 
 /**
 *
@@ -9,10 +8,10 @@ class AdminMb
 {
   var $pathBase;
   var $mobile_settings;
-  function __construct()
+  function __construct(&$settings)
   {
     $this->pathBase = 'mobileSite/mobileSite.php';
-    $this->mobile_settings = new Settings();
+    $this->mobile_settings = $settings;
     $this->add_filters();
 
   }

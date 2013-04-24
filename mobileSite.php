@@ -14,6 +14,8 @@ License: GNU General Public License 2.0 (GPL) http://www.gnu.org/licenses/gpl.ht
  require_once("core/functions.php");
  require_once("core/helpers.php");
  require_once("core/mobile.php");
+ require_once("core/Settings.php");
+
  if ( is_admin() ) {
    require_once("core/admin/Admin.php");
  }
@@ -21,17 +23,21 @@ class MobileSite
 {
   var $mobile;
   var $admin;
+  var $mobile_settings;
   function MobileSite()
   {
-    # code...
-    $this->mobile = new Mobile();
+
+    $this->mobile_settings = new Settings();
+
+    $this->mobile = new Mobile($this->mobile_settings);
 
     $this->mobile->detectMobile();
 
     $this->addFilters();
 
+
     if(is_admin()){
-      $this->admin = new AdminMb();
+      $this->admin = new AdminMb($this->mobile_settings);
     }
 
   }

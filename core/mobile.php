@@ -9,9 +9,12 @@ class Mobile
   var $isMobile;
   var $desired_view;
   var $useragents;
-  function __construct()
+  var $mobile_settings;
+  function __construct(&$settings)
   {
     # code...
+    $this->mobile_settings = $settings;
+
     $this->isMobile = false;
     $this->registerDevice();
   }

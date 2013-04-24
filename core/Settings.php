@@ -21,7 +21,7 @@ class Settings
     return wp_verify_nonce($nonce, 'mobileSite-nonce' );
   }
 
-  function getSetting($label){
+  function getValue($label){
     return (isset($this->mobile_settings[$label])) ? $this->mobile_settings[$label] :  '';
   }
 
