@@ -48,12 +48,12 @@ class AdminMb
   }
   function add_admin_files() {
     if ( isset( $_GET['page'] ) && $_GET['page'] == $this->pathBase ) {
-      echo "<link rel='stylesheet' type='text/css' href='" . compat_get_plugin_url( 'mobileSite' ) . "/core/admin/template/css/admin.css' />\n";
+      echo "<link rel='stylesheet' type='text/css' href='" . plugins_url( 'mobileSite' ) . "/core/admin/template/css/admin.css' />\n";
     }
   }
   function add_javaScript(){
     if ( isset( $_GET['page'] ) && $_GET['page'] == $this->pathBase ) {
-      wp_enqueue_script( 'mobileSite-js', compat_get_plugin_url( 'mobileSite' ) . '/core/admin/template/js/admin.js', array( 'jquery' ) );
+      wp_enqueue_script( 'mobileSite-js', plugins_url( 'mobileSite' ) . '/core/admin/template/js/admin.js', array( 'jquery' ) );
     }
   }
 }

@@ -11,7 +11,6 @@ License: GNU General Public License 2.0 (GPL) http://www.gnu.org/licenses/gpl.ht
 
 */
 
- require_once("core/functions.php");
  require_once("core/helpers.php");
  require_once("core/mobile.php");
  require_once("core/Settings.php");
@@ -47,7 +46,7 @@ class MobileSite
     if ( !is_admin() ) {
       add_filter( 'stylesheet', array(&$this, 'get_stylesheet') );
       add_filter( 'theme_root', array(&$this, 'theme_root') );
-      add_filter( 'theme_root_uri', array(&$this, 'theme_root_uri') );
+      //add_filter( 'theme_root_uri', array(&$this, 'theme_root_uri') );
       add_filter( 'template', array(&$this, 'get_template') );
     }
 
@@ -63,15 +62,17 @@ class MobileSite
   }
   function get_template( $template ) {
     if ($this->mobile->changeTheme()) {
-      return 'default';
+      return $this->mobile_settings->getValue('mobile-theme');
     } else {
       return $template;
     }
   }
   function theme_root( $path ) {
-    $theme_root = compat_get_plugin_dir( 'mobileSite' );
-    if ($this->mobile->changeTheme()) {
-      return $theme_root . '/themes';
+
+    $nameTheme = $this->mobile_settings->getValue('mobile-theme');
+
+    if($nameTheme == 'default' && $this->mobile->changeTheme()){
+      return plugins_url( 'mobileSite' ) . "/themes";
     } else {
       return $path;
     }
@@ -79,7 +80,12 @@ class MobileSite
 
   function theme_root_uri( $url ) {
     if ($this->mobile->changeTheme()) {
-      return compat_get_plugin_url( 'mobileSite' ) . "/themes";
+      $nameTheme = $this->mobile_settings->getValue('mobile-theme');
+      if($nameTheme != 'default'){
+        return theme_url() . $nameTheme ;
+      }else{
+        return plugins_url('wptouch' ) . "/themes";
+      }
     } else {
       return $url;
     }

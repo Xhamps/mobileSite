@@ -29,7 +29,6 @@ class Settings
     if ( isset( $_POST['submit'] ) ) {
 
       $nonce = $_POST['mobile-nonce'];
-
       // Security
       if ( !$this->check_nonce( $nonce) ) {
         _e( "Nonce Failure");
