@@ -54,14 +54,14 @@ class MobileSite
   }
 
   function get_stylesheet( $stylesheet ) {
-    if ($this->mobile->changeTheme()) {
+    if ($this->mobile->changeTheme() && !is_admin()) {
       return 'default';
     } else {
       return $stylesheet;
     }
   }
   function get_template( $template ) {
-    if ($this->mobile->changeTheme()) {
+    if ($this->mobile->changeTheme()  && !is_admin() ) {
       return $this->mobile_settings->getValue('mobile-theme');
     } else {
       return $template;
@@ -71,7 +71,7 @@ class MobileSite
 
     $nameTheme = $this->mobile_settings->getValue('mobile-theme');
 
-    if($nameTheme == 'default' && $this->mobile->changeTheme()){
+    if($nameTheme == 'default' && $this->mobile->changeTheme() && !is_admin()){
       return plugins_url( 'mobileSite' ) . "/themes";
     } else {
       return $path;
@@ -79,7 +79,7 @@ class MobileSite
   }
 
   function theme_root_uri( $url ) {
-    if ($this->mobile->changeTheme()) {
+    if ($this->mobile->changeTheme() && !is_admin()) {
       $nameTheme = $this->mobile_settings->getValue('mobile-theme');
       if($nameTheme != 'default'){
         return theme_url() . $nameTheme ;
