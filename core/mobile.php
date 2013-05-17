@@ -50,7 +50,13 @@ class Mobile
                           's8000',          // Samsung s8000
                           'bada',           // Samsung Bada Phone
                           'Googlebot-Mobile', // Google's mobile Crawler
-                          'AdsBot-Google'   // Google's Ad Bot Crawler
+                          'AdsBot-Google',   // Google's Ad Bot Crawler
+                          'LG',
+                          'GW910',
+                          'ARM',
+                          'Touch',
+                          'Nokia',
+                          'Lumia'
                           );
 
 
