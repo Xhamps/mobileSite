@@ -15,7 +15,6 @@ License: GNU General Public License 2.0 (GPL) http://www.gnu.org/licenses/gpl.ht
  require_once("core/mobile.php");
  require_once("core/Settings.php");
 
-if(!defined("DOING_AJAX")) define("DOING_AJAX" , false);
 
  if ( is_admin() ) {
    require_once("core/admin/Admin.php");
@@ -43,7 +42,9 @@ class MobileSite
   }
 
   function addFilters(){
-    if ( !is_admin()  || DOING_AJAX ) {
+
+
+    if ( !is_admin()  || $this->isAjax() ) {
       add_filter( 'stylesheet', array(&$this, 'get_stylesheet') );
       add_filter( 'theme_root', array(&$this, 'theme_root') );
       //add_filter( 'theme_root_uri', array(&$this, 'theme_root_uri') );
@@ -54,14 +55,14 @@ class MobileSite
   }
 
   function get_stylesheet( $stylesheet ) {
-    if (( $this->mobile->changeTheme() && !is_admin() ) || DOING_AJAX ) {
+    if (( $this->mobile->changeTheme() && !is_admin() ) || $this->isAjax() ) {
       return 'default';
     } else {
       return $stylesheet;
     }
   }
   function get_template( $template ) {
-    if (( $this->mobile->changeTheme() && !is_admin() ) || DOING_AJAX ) {
+    if (( $this->mobile->changeTheme() && !is_admin() ) || $this->isAjax() ) {
       return $this->mobile_settings->getValue('mobile-theme');
     } else {
       return $template;
@@ -70,7 +71,7 @@ class MobileSite
   function theme_root( $path ) {
     $nameTheme = $this->mobile_settings->getValue('mobile-theme');
 
-    if($nameTheme == 'default' && (( $this->mobile->changeTheme() && !is_admin() ) || DOING_AJAX )){
+    if($nameTheme == 'default' && (( $this->mobile->changeTheme() && !is_admin() ) || $this->isAjax() )){
       return plugins_url( 'mobileSite' ) . "/themes";
     } else {
       return $path;
@@ -78,7 +79,7 @@ class MobileSite
   }
 
   function theme_root_uri( $url ) {
-    if (( $this->mobile->changeTheme() && !is_admin() ) || DOING_AJAX ){
+    if (( $this->mobile->changeTheme() && !is_admin() ) || $this->isAjax() ){
       $nameTheme = $this->mobile_settings->getValue('mobile-theme');
       if($nameTheme != 'default'){
         return theme_url() . $nameTheme ;
@@ -94,6 +95,9 @@ class MobileSite
   }
   function isMobile(){
     return $this->mobile->isMobile;
+  }
+  function isAjax(){
+    return !defined("DOING_AJAX") ||  DOING_AJAX;
   }
 }
 global $wpMobileSite;
